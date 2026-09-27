@@ -10,6 +10,7 @@ export async function GET(context: APIContext) {
     description: SITE.description,
     site: context.site!,
     trailingSlash: true,
+    stylesheet: "/rss.xsl",
     customData: "<language>en-us</language>",
     items: articles.map(a => ({
       title: a.data.title,
