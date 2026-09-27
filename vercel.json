@@ -1,0 +1,352 @@
+{
+  "framework": "astro",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/aubrey-smalls",
+      "destination": "/did-ethan-klein-use-a-person-with-dwarfism-for-a-bit/",
+      "statusCode": 301
+    },
+    {
+      "source": "/aubrey-smalls/",
+      "destination": "/did-ethan-klein-use-a-person-with-dwarfism-for-a-bit/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ben-shapiro",
+      "destination": "/did-ethan-klein-call-for-the-death-of-ben-shapiro/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ben-shapiro/",
+      "destination": "/did-ethan-klein-call-for-the-death-of-ben-shapiro/",
+      "statusCode": 301
+    },
+    {
+      "source": "/black-face",
+      "destination": "/did-ethan-and-hila-klein-do-blackface/",
+      "statusCode": 301
+    },
+    {
+      "source": "/black-face/",
+      "destination": "/did-ethan-and-hila-klein-do-blackface/",
+      "statusCode": 301
+    },
+    {
+      "source": "/boston-marathon",
+      "destination": "/did-ethan-klein-sexually-harass-an-underage-boston-bombing-victim/",
+      "statusCode": 301
+    },
+    {
+      "source": "/boston-marathon/",
+      "destination": "/did-ethan-klein-sexually-harass-an-underage-boston-bombing-victim/",
+      "statusCode": 301
+    },
+    {
+      "source": "/denims-chat",
+      "destination": "/did-ethan-klein-lie-about-messages-in-denims-chat-suggesting-someone-call-cps/",
+      "statusCode": 301
+    },
+    {
+      "source": "/denims-chat/",
+      "destination": "/did-ethan-klein-lie-about-messages-in-denims-chat-suggesting-someone-call-cps/",
+      "statusCode": 301
+    },
+    {
+      "source": "/drug-abuse",
+      "destination": "/does-ethan-klein-abuse-drugs/",
+      "statusCode": 301
+    },
+    {
+      "source": "/drug-abuse/",
+      "destination": "/does-ethan-klein-abuse-drugs/",
+      "statusCode": 301
+    },
+    {
+      "source": "/false-video-report",
+      "destination": "/did-ethan-klein-falsely-report-videos-to-silence-criticism/",
+      "statusCode": 301
+    },
+    {
+      "source": "/false-video-report/",
+      "destination": "/did-ethan-klein-falsely-report-videos-to-silence-criticism/",
+      "statusCode": 301
+    },
+    {
+      "source": "/frivolous-lawsuits",
+      "destination": "/are-ethan-kleins-lawsuits-frivolous/",
+      "statusCode": 301
+    },
+    {
+      "source": "/frivolous-lawsuits/",
+      "destination": "/are-ethan-kleins-lawsuits-frivolous/",
+      "statusCode": 301
+    },
+    {
+      "source": "/fupa-fund",
+      "destination": "/was-the-fupa-fund-a-scam/",
+      "statusCode": 301
+    },
+    {
+      "source": "/fupa-fund/",
+      "destination": "/was-the-fupa-fund-a-scam/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gabe",
+      "destination": "/does-ethan-klein-take-advantage-of-gabe/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gabe/",
+      "destination": "/does-ethan-klein-take-advantage-of-gabe/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gambling-sponsors",
+      "destination": "/did-ethan-klein-promote-gambling/",
+      "statusCode": 301
+    },
+    {
+      "source": "/gambling-sponsors/",
+      "destination": "/did-ethan-klein-promote-gambling/",
+      "statusCode": 301
+    },
+    {
+      "source": "/giardia",
+      "destination": "/did-ethan-klein-suggest-his-children-ingested-dog-poop/",
+      "statusCode": 301
+    },
+    {
+      "source": "/giardia/",
+      "destination": "/did-ethan-klein-suggest-his-children-ingested-dog-poop/",
+      "statusCode": 301
+    },
+    {
+      "source": "/hila-oct-7",
+      "destination": "/did-hila-klein-deny-idf-violence-against-palestinians/",
+      "statusCode": 301
+    },
+    {
+      "source": "/hila-oct-7/",
+      "destination": "/did-hila-klein-deny-idf-violence-against-palestinians/",
+      "statusCode": 301
+    },
+    {
+      "source": "/houthi-pirate",
+      "destination": "/did-ethan-klein-call-an-arab-man-a-terrorist-due-to-bigotry/",
+      "statusCode": 301
+    },
+    {
+      "source": "/houthi-pirate/",
+      "destination": "/did-ethan-klein-call-an-arab-man-a-terrorist-due-to-bigotry/",
+      "statusCode": 301
+    },
+    {
+      "source": "/instagram-doxxing",
+      "destination": "/did-ethan-klein-dox-people-on-instagram-comments/",
+      "statusCode": 301
+    },
+    {
+      "source": "/instagram-doxxing/",
+      "destination": "/did-ethan-klein-dox-people-on-instagram-comments/",
+      "statusCode": 301
+    },
+    {
+      "source": "/lawsuits-doxxing",
+      "destination": "/did-ethan-klein-dox-defendants-of-his-lawsuits/",
+      "statusCode": 301
+    },
+    {
+      "source": "/lawsuits-doxxing/",
+      "destination": "/did-ethan-klein-dox-defendants-of-his-lawsuits/",
+      "statusCode": 301
+    },
+    {
+      "source": "/pager-soundbite",
+      "destination": "/did-the-h3-podcast-play-pager-sounds-to-mock-arab-streamers/",
+      "statusCode": 301
+    },
+    {
+      "source": "/pager-soundbite/",
+      "destination": "/did-the-h3-podcast-play-pager-sounds-to-mock-arab-streamers/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ramadan",
+      "destination": "/did-ethan-klein-instruct-h3-moderators-to-take-down-ramadan-related-posts/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ramadan/",
+      "destination": "/did-ethan-klein-instruct-h3-moderators-to-take-down-ramadan-related-posts/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ramallah-raid",
+      "destination": "/did-hila-klein-participate-in-combat-operations-in-the-idf/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ramallah-raid/",
+      "destination": "/did-hila-klein-participate-in-combat-operations-in-the-idf/",
+      "statusCode": 301
+    },
+    {
+      "source": "/shredder",
+      "destination": "/did-ethan-klein-kill-his-dog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/shredder/",
+      "destination": "/did-ethan-klein-kill-his-dog/",
+      "statusCode": 301
+    },
+    {
+      "source": "/skulls",
+      "destination": "/did-ethan-and-hila-klein-fake-having-2-human-skulls-sent-to-them/",
+      "statusCode": 301
+    },
+    {
+      "source": "/skulls/",
+      "destination": "/did-ethan-and-hila-klein-fake-having-2-human-skulls-sent-to-them/",
+      "statusCode": 301
+    },
+    {
+      "source": "/too-nice-too-mean-jimmy-lee",
+      "destination": "/was-h3-too-mean-or-too-nice-to-jimmie-lee/",
+      "statusCode": 301
+    },
+    {
+      "source": "/too-nice-too-mean-jimmy-lee/",
+      "destination": "/was-h3-too-mean-or-too-nice-to-jimmie-lee/",
+      "statusCode": 301
+    },
+    {
+      "source": "/women-to-be-conquered",
+      "destination": "/did-ethan-klein-say-women-are-meant-to-be-conquered/",
+      "statusCode": 301
+    },
+    {
+      "source": "/women-to-be-conquered/",
+      "destination": "/did-ethan-klein-say-women-are-meant-to-be-conquered/",
+      "statusCode": 301
+    },
+    {
+      "source": "/yoav-gallant",
+      "destination": "/did-ethan-and-hila-klein-endorse-yoav-gallant/",
+      "statusCode": 301
+    },
+    {
+      "source": "/yoav-gallant/",
+      "destination": "/did-ethan-and-hila-klein-endorse-yoav-gallant/",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed",
+      "destination": "/rss.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed/",
+      "destination": "/rss.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/debunked-by-chat/:path*",
+      "destination": "/:path*",
+      "statusCode": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), browsing-topics=()"
+        }
+      ]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/pagefind/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/og/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    },
+    {
+      "source": "/icons/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.mp4",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.webm",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000"
+        }
+      ]
+    }
+  ]
+}
