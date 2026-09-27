@@ -1,0 +1,61 @@
+<footer class="site-footer">
+  <div class="container">
+    <nav aria-label="Footer">
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/rss.xml">RSS</a>
+    </nav>
+    <p class="disclaimer">Not affiliated with the H3 Podcast, Ethan Klein or Hila Klein.</p>
+    <p>
+      By{" "}
+      <a href="https://linktr.ee/FoopaTroopaH3" target="_blank" rel="noopener noreferrer">
+        Foopa Troopa
+      </a>{" "}
+      &amp;{" "}
+      <a href="https://www.reddit.com/user/GrapeTickler/" target="_blank" rel="noopener noreferrer">
+        Grape Tickler
+      </a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: clamp(3rem, 2rem + 4vw, 6rem);
+    background: #1c1a20;
+    color: #95909b;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  .container {
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+    padding-block: 2rem;
+    text-align: center;
+  }
+
+  nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .disclaimer {
+    font-size: max(11px, min(0.8125rem, calc((100vw - var(--gutter) * 2) / 30.5)));
+    text-wrap: balance;
+  }
+
+  a {
+    color: #eeebe7;
+    text-decoration-color: rgb(248 104 136 / 0.5);
+    text-decoration-thickness: 1px;
+  }
+
+  a:hover {
+    color: #ff8fa8;
+  }
+</style>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://snarkbrain.com/sitemap-index.xml

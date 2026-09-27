@@ -1,0 +1,36 @@
+---
+import Page from "../layouts/Page.astro"
+import { SITE } from "../site"
+
+const mail = (subject: string) => `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}`
+---
+
+<Page
+  title="Contact"
+  description="Contact SnarkBrain to suggest a claim to fact-check, report an error, or submit an article or evidence."
+  lede="Suggest a claim, report an error, or send us something we should see."
+  schemaType="ContactPage"
+>
+  <p>
+    Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Whatever you're sending, links and timestamps help us check
+    it faster.
+  </p>
+
+  <h2>Suggest a claim to check</h2>
+  <p>
+    Tell us what the claim is, where you saw it and roughly when it started circulating.
+    <a href={mail("Claim suggestion")}>Suggest a claim</a>
+  </p>
+
+  <h2>Report an error</h2>
+  <p>
+    Include the page, the statement you believe is wrong and any evidence. See how we handle mistakes in our
+    <a href="/methodology/#corrections">corrections policy</a>.<a href={mail("Correction")}>Report an error</a>
+  </p>
+
+  <h2>Submit an article or evidence</h2>
+  <p>
+    Drafts, clips, documents and archived posts are all welcome. Everything we publish is checked against primary
+    sources first; see our <a href="/methodology/">methodology</a>.<a href={mail("Submission")}>Send a submission</a>
+  </p>
+</Page>

@@ -1,0 +1,45 @@
+---
+import VerdictBadge from "./VerdictBadge.astro"
+import { VERDICT_NAMES } from "../site"
+import { getArticles, type Article } from "../lib/articles"
+
+interface Props {
+  articles: Article[]
+}
+
+const { articles } = Astro.props
+const used = new Set((await getArticles()).map(a => a.data.verdict))
+const verdicts = VERDICT_NAMES.filter(v => used.has(v)).map(v => ({
+  v,
+  n: articles.filter(a => a.data.verdict === v).length,
+}))
+---
+
+<ul class="tally" aria-label="Verdicts">
+  {verdicts.map(({ v, n }) => (
+    <li>
+      <VerdictBadge verdict={v} size="sm" />
+      <span>{n}</span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .tally {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--ink-2);
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+</style>

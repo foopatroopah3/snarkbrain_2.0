@@ -1,0 +1,50 @@
+---
+import Page from "../layouts/Page.astro"
+import { SITE } from "../site"
+---
+
+<Page
+  title="Privacy"
+  description="SnarkBrain uses no cookies, ads, analytics or trackers. What little data is involved in visiting or contacting us, and how it's handled."
+  lede="No cookies, ads, analytics or trackers."
+>
+  <p>
+    <em>Last updated September 26, 2026.</em>
+  </p>
+
+  <h2>Visiting the site</h2>
+  <p>
+    SnarkBrain doesn't set cookies, run analytics or load advertising or tracking scripts. Fonts, images and video are
+    served from this domain, so reading a page doesn't contact any third party.
+  </p>
+  <p>
+    The site is hosted on <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a>. Like any web host, it
+    processes technical information such as your IP address and browser to deliver pages and protect the site from
+    abuse. We don't receive or store that information.
+  </p>
+
+  <h2>On your device</h2>
+  <p>
+    If you switch between light and dark mode, your choice is saved in your browser's local storage so it's remembered
+    next time. It never leaves your device.
+  </p>
+  <p>Search runs entirely in your browser. What you type isn't sent to us or anyone else.</p>
+
+  <h2>Contacting us</h2>
+  <p>
+    If you email us, we receive your email address and whatever you send. We use it only to read and reply to your
+    message, and we don't share it or add you to any list. Ask us to delete your messages at any time.
+  </p>
+
+  <h2>Links to other sites</h2>
+  <p>
+    Fact-checks link to sources such as YouTube, Reddit and court records. Those sites have their own privacy policies,
+    which apply once you follow a link. The share buttons on fact-checks are plain links too: nothing is sent to a
+    social network unless you click one.
+  </p>
+
+  <h2>Questions</h2>
+  <p>
+    Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+  </p>
+</Page>

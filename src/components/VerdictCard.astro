@@ -1,0 +1,109 @@
+---
+import VerdictBadge from "./VerdictBadge.astro"
+import { VERDICTS } from "../site"
+import type { Article } from "../lib/articles"
+
+interface Props {
+  article: Article
+}
+
+const { claim, claimant, verdict, description } = Astro.props.article.data
+---
+
+<section class="verdict-card" aria-labelledby="claim-label">
+  <div class="claim">
+    <p class="kicker" id="claim-label">
+      The claim
+    </p>
+    <p class="claim-text" data-pagefind-weight="4" set:text={`“${claim}”`} />
+    <p class="claimant">
+      Circulated by <strong>{claimant ?? "online critics"}</strong>
+    </p>
+  </div>
+  <div class="rating">
+    <p class="kicker">Our verdict</p>
+    <VerdictBadge verdict={verdict} size="lg" meta />
+    <p class="meaning">{VERDICTS[verdict].summary}</p>
+  </div>
+  <p class="summary">
+    <strong>In short:</strong> {description}
+  </p>
+</section>
+
+<style>
+  .verdict-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .claim,
+  .rating {
+    padding: clamp(1.1rem, 0.9rem + 1vw, 1.6rem);
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+  }
+
+  .rating {
+    border-left: 1px solid var(--line);
+    background: color-mix(in srgb, var(--surface-2) 55%, var(--surface));
+  }
+
+  .claim-text {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  .claimant,
+  .meaning {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--ink-3);
+    text-wrap: balance;
+  }
+
+  @media (max-width: 30rem) {
+    .meaning {
+      font-size: 0.8125rem;
+    }
+  }
+
+  .claimant strong {
+    color: var(--ink-2);
+    font-weight: 650;
+  }
+
+  .summary {
+    grid-column: 1 / -1;
+    padding: 1rem clamp(1.1rem, 0.9rem + 1vw, 1.6rem);
+    border-top: 1px solid var(--line);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+
+  .summary strong {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--ink);
+  }
+
+  @media (max-width: 40rem) {
+    .verdict-card {
+      grid-template-columns: 1fr;
+    }
+    .rating {
+      border-left: 0;
+      border-top: 1px solid var(--line);
+    }
+  }
+</style>

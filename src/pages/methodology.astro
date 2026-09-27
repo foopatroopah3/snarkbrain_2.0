@@ -1,0 +1,114 @@
+---
+import Page from "../layouts/Page.astro"
+import VerdictBadge from "../components/VerdictBadge.astro"
+import { VERDICTS, VERDICT_NAMES } from "../site"
+---
+
+<Page
+  title="Methodology"
+  description="How SnarkBrain chooses claims to check, the sources we rely on, how fact-checks are structured, what each verdict means and how we correct mistakes."
+  lede="How we choose claims, what counts as evidence, and what our verdicts mean."
+>
+  <h2>What we check</h2>
+  <p>
+    We check specific, verifiable claims about Ethan Klein, Hila Klein and the H3 Podcast that are circulating publicly
+    — on Reddit, YouTube, TikTok, X and elsewhere. We focus on claims the record can confirm or refute.
+  </p>
+
+  <h2>What counts as evidence</h2>
+  <p>We rely on primary sources wherever they exist:</p>
+  <ul>
+    <li>full episodes and streams, linked at the exact timestamp being discussed;</li>
+    <li>court filings and other public records;</li>
+    <li>original posts and statements from the people involved.</li>
+  </ul>
+  <p>
+    Where a primary source is at risk of disappearing, we host a copy alongside the fact-check. Reference material and
+    news reporting are cited for general facts and background, such as medical or legal context.
+  </p>
+
+  <h2>How a fact-check is structured</h2>
+  <p>Every fact-check follows the same format, so you can find what you need quickly:</p>
+  <ol>
+    <li>
+      <strong>The claim and verdict</strong>, summarized at the top.
+    </li>
+    <li>
+      <strong>Background</strong>: the context needed to understand where the claim came from.
+    </li>
+    <li>
+      <strong>Claim</strong>: stated the way its proponents state it.
+    </li>
+    <li>
+      <strong>Truth</strong>: what the record shows, point by point, with a numbered citation for each statement.
+    </li>
+    <li>
+      <strong>Conclusion</strong>: what the evidence adds up to.
+    </li>
+    <li>
+      <strong>References</strong>: every source, in order.
+    </li>
+  </ol>
+
+  <h2>Verdicts</h2>
+  <dl class="verdicts">
+    {VERDICT_NAMES.map(v => (
+      <div>
+        <dt>
+          <VerdictBadge verdict={v} />
+        </dt>
+        <dd>{VERDICTS[v].summary}</dd>
+      </div>
+    ))}
+  </dl>
+
+  <h2>Dates and updates</h2>
+  <p>
+    Each fact-check shows the date it was published and, when it has been materially revised, the date of its latest
+    update.
+  </p>
+
+  <h2 id="corrections">Corrections</h2>
+  <p>
+    If a fact-check contains a factual error, we correct it and add a dated note at the bottom of the page explaining
+    what changed. If new evidence changes a verdict, the verdict is updated and noted the same way. Typos, formatting
+    and broken links are fixed without a note.
+  </p>
+  <p>
+    To report an error, <a href="/contact/">contact us</a> with the page, the statement you believe is wrong and any
+    evidence.
+  </p>
+</Page>
+
+<style>
+  .verdicts {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .verdicts div {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+  }
+
+  .verdicts dd {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 34rem) {
+    .verdicts div {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+</style>

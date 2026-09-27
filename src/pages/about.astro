@@ -1,0 +1,54 @@
+---
+import Page from "../layouts/Page.astro"
+import { SITE } from "../site"
+---
+
+<Page
+  title="About SnarkBrain"
+  description="SnarkBrain is an independent archive of fact-checks about claims circulating online about Ethan Klein, Hila Klein and the H3 Podcast."
+  schemaType="AboutPage"
+>
+  <p>
+    Accusations about Ethan and Hila Klein spread fast, usually as a cropped clip, a screenshot or a secondhand summary.
+    The original context almost always exists, but it's buried in hours of footage, court dockets and old posts.
+    SnarkBrain gathers that context in one place so anyone can check a claim against the evidence for themselves.
+  </p>
+  <p>
+    For years, Ethan and Hila Klein and their businesses have been targets of harassment from a dedicated online
+    community whose members call themselves “snarkers.” Its narratives have distorted the couple's public image and
+    caused irreparable damage to their reputation. SnarkBrain is an attempt to clarify things, while staying honest
+    about the facts, even when they're unflattering.
+  </p>
+
+  <h2>The name</h2>
+  <p>
+    The term describes the mindset these fact-checks respond to: treating every clip in the worst possible light, and
+    repeating a claim because it fits, not because it's true.
+  </p>
+
+  <h2>Who writes it</h2>
+  <p>
+    SnarkBrain is written by members of the H3 community, and we don't pretend otherwise. That's exactly why every
+    factual statement on this site links to a source you can check. You shouldn't have to take our word for anything.
+  </p>
+  <p>
+    Contributors include
+    <a href="https://linktr.ee/FoopaTroopaH3" target="_blank" rel="noopener noreferrer">
+      Foopa Troopa
+    </a>{" "}
+    and
+    <a href="https://www.reddit.com/user/GrapeTickler/" target="_blank" rel="noopener noreferrer">
+      Grape Tickler
+    </a>
+    , along with anonymous community members.
+  </p>
+
+  <h2>Independence</h2>
+  <p>SnarkBrain is not affiliated with or endorsed by the H3 Podcast, Ethan Klein or Hila Klein.</p>
+
+  <h2>Contact</h2>
+  <p>
+    To report an error, share new evidence or suggest a claim to check, email
+    <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Read how we work in our <a href="/methodology/">methodology</a>.
+  </p>
+</Page>

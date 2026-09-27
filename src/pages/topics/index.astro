@@ -1,0 +1,120 @@
+---
+import Base from "../../layouts/Base.astro"
+import { articleUrl, getArticles, topicCounts, topicUrl } from "../../lib/articles"
+import { breadcrumbs, webPage } from "../../lib/schema"
+
+const articles = await getArticles()
+const topics = topicCounts(articles).map(t => ({
+  ...t,
+  latest: articles.filter(a => a.data.tags.includes(t.topic)).slice(0, 3),
+}))
+
+const title = "Topics"
+const description = "Fact-checks about Ethan Klein, Hila Klein and the H3 Podcast, organized by subject."
+const crumbs = [
+  { name: "Home", path: "/" },
+  { name: title, path: "/topics/" },
+]
+---
+
+<Base
+  title={title}
+  description={description}
+  graph={[webPage("CollectionPage", "/topics/", title, description), breadcrumbs(crumbs)]}
+>
+  <div class="container">
+    <header class="page-head">
+      <h1>{title}</h1>
+      <p>Fact-checks organized by subject.</p>
+    </header>
+
+    <ul class="topics">
+      {topics.map(t => (
+        <li class="topic">
+          <h2>
+            <a href={topicUrl(t.topic)}>{t.label}</a>
+          </h2>
+          <p class="count">
+            {t.count} fact-check{t.count === 1 ? "" : "s"}
+          </p>
+          <p class="desc">{t.description}</p>
+          <ul class="latest">
+            {t.latest.map(a => (
+              <li>
+                <a href={articleUrl(a)}>{a.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .topics {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .topic {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.3rem 1.4rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h2 a {
+    text-decoration: none;
+  }
+
+  h2 a:hover {
+    text-decoration: underline;
+  }
+
+  .count {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--brand-text);
+  }
+
+  .desc {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  .latest {
+    margin: 0.5rem 0 0;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid var(--line);
+    list-style: none;
+    display: grid;
+    gap: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .latest a {
+    color: var(--ink-2);
+    text-decoration-thickness: 1px;
+  }
+
+  .latest a:hover {
+    color: var(--ink);
+  }
+</style>

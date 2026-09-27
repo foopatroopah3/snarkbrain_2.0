@@ -1,0 +1,278 @@
+---
+import { Image } from "astro:assets"
+import logoMark from "../assets/logo-mark.png"
+
+const nav = [
+  { href: "/articles/", label: "Fact-checks" },
+  { href: "/topics/", label: "Topics" },
+  { href: "/methodology/", label: "Methodology" },
+  { href: "/about/", label: "About" },
+]
+
+const path = Astro.url.pathname
+const current = (href: string) => (path.startsWith(href) ? "page" : undefined)
+---
+
+<header class="site-header">
+  <div class="container inner">
+    <a href="/" class="brand">
+      <Image src={logoMark} alt="" width={46} densities={[1, 2]} loading="eager" />
+      <span>SnarkBrain</span>
+    </a>
+
+    <nav aria-label="Main" class="nav">
+      <ul>
+        {nav.map(item => (
+          <li>
+            <a href={item.href} aria-current={current(item.href)}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="actions">
+      <button type="button" class="icon-btn search-btn" data-search-open aria-label="Search fact-checks">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+        <span class="search-label">Search</span>
+        <kbd>/</kbd>
+      </button>
+      <button type="button" class="icon-btn" data-theme-toggle aria-label="Toggle dark mode">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="8.5"></circle>
+          <path d="M12 3.5v17a8.5 8.5 0 0 0 0-17Z" fill="currentColor"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
+    const root = document.documentElement
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches
+    const next = dark ? "light" : "dark"
+    const apply = () => {
+      root.dataset.theme = next
+      try {
+        localStorage.setItem("theme", next)
+      } catch {}
+    }
+    if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches) return apply()
+    root.classList.add("theme-vt")
+    document.startViewTransition(apply).finished.finally(() => root.classList.remove("theme-vt"))
+  })
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .site-header {
+      animation: header-lift linear both;
+      animation-range: 0 120px;
+    }
+
+    /* Separate selectors so the minifier can't fold the timeline into the animation shorthand, which browsers reject. */
+    header.site-header {
+      animation-timeline: scroll(root block);
+    }
+  }
+
+  @keyframes header-lift {
+    to {
+      box-shadow: 0 8px 24px -16px var(--shadow-tint);
+    }
+  }
+
+  .inner {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .brand img {
+    width: 46px;
+    height: auto;
+    transition: transform 0.25s ease;
+  }
+
+  .brand:hover {
+    color: var(--ink);
+  }
+
+  .brand:hover img {
+    transform: rotate(-8deg) scale(1.06);
+  }
+
+  .nav {
+    margin-right: auto;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav ul {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  nav a {
+    display: block;
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--ink);
+    background: var(--surface-2);
+  }
+
+  nav a[aria-current="page"] {
+    color: var(--ink);
+    background: var(--brand-tint);
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.4rem;
+    min-width: 2.4rem;
+    padding: 0 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .icon-btn:hover {
+    color: var(--ink);
+    border-color: var(--line-strong);
+  }
+
+  svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .search-btn {
+    padding-inline: 0.75rem 0.5rem;
+    min-width: 12rem;
+    justify-content: flex-start;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--ink-3);
+  }
+
+  .search-label {
+    margin-right: auto;
+  }
+
+  kbd {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    padding: 0.05rem 0.4rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 5px;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 56rem) {
+    .search-btn {
+      min-width: 0;
+    }
+    .search-label,
+    kbd {
+      display: none;
+    }
+  }
+
+  @media (max-width: 44rem) {
+    .inner {
+      height: auto;
+      flex-wrap: wrap;
+      row-gap: 0.35rem;
+      padding-block: 0.6rem 0.45rem;
+    }
+    .actions {
+      margin-left: auto;
+    }
+    .nav {
+      order: 3;
+      width: calc(100% + var(--gutter) * 2);
+      margin: 0 calc(var(--gutter) * -1);
+      padding-inline: var(--gutter);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar {
+      display: none;
+    }
+    .nav ul {
+      justify-content: space-between;
+      min-width: max-content;
+    }
+    nav a {
+      padding: 0.35rem 0.5rem;
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+  }
+
+  @media (max-width: 23rem) {
+    nav a {
+      padding-inline: 0.4rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    kbd {
+      display: none;
+    }
+  }
+</style>

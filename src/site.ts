@@ -1,0 +1,82 @@
+export const SITE = {
+  name: "SnarkBrain",
+  url: "https://snarkbrain.com",
+  tagline: "Fact-checking the claims about Ethan Klein, Hila Klein and the H3 Podcast",
+  description:
+    "Fact-checking the claims about Ethan Klein, Hila Klein and the H3 Podcast: viral accusations traced back to the full clips and public records they came from.",
+  email: "contact@snarkbrain.com",
+  locale: "en_US",
+}
+
+export const VERDICTS = {
+  False: {
+    slug: "false",
+    rating: 1,
+    summary: "The claim is not supported by the evidence.",
+  },
+  Misleading: {
+    slug: "misleading",
+    rating: 2,
+    summary: "The claim is built on something real, but distorts it or strips it of context.",
+  },
+  Mixed: {
+    slug: "mixed",
+    rating: 3,
+    summary: "The claim is partly accurate and partly inaccurate.",
+  },
+  True: {
+    slug: "true",
+    rating: 5,
+    summary: "The claim is accurate and supported by the evidence.",
+  },
+} as const
+
+export type Verdict = keyof typeof VERDICTS
+export const VERDICT_NAMES = Object.keys(VERDICTS) as [Verdict, ...Verdict[]]
+
+export const TOPICS = {
+  "israel-palestine": {
+    label: "Israel & Palestine",
+    description:
+      "Claims about Ethan and Hila Klein's statements, history and reactions relating to Israel, Palestine and the wider Middle East.",
+  },
+  "bigotry-allegations": {
+    label: "Bigotry Allegations",
+    description: "Accusations of racism, Islamophobia and anti-Arab bias, and what the full record shows.",
+  },
+  "lawsuits-copyright": {
+    label: "Lawsuits & Copyright",
+    description: "Copyright lawsuits, DMCA takedowns, fair use, clip channels and legal funds.",
+  },
+  "censorship-claims": {
+    label: "Censorship Claims",
+    description: "Claims that takedowns, reports and moderation were used to silence critics.",
+  },
+  "family-home": {
+    label: "Family & Home",
+    description: "Claims about the Klein household, their children, their pets and the CPS report.",
+  },
+  doxxing: {
+    label: "Doxxing Claims",
+    description: "Accusations of exposing private information about critics and defendants.",
+  },
+  "past-content": {
+    label: "Past Content",
+    description: "Old videos and podcast moments resurfaced without their original context.",
+  },
+  "show-guests": {
+    label: "Guests & Crew",
+    description: "How the H3 Podcast has treated its guests, crew and recurring personalities.",
+  },
+  business: {
+    label: "Business & Money",
+    description: "Sponsorships, Teddy Fresh and community fundraising.",
+  },
+  "fabricated-evidence": {
+    label: "Fabricated Evidence",
+    description: "Hoaxes built on doctored screenshots, edited clips and staged claims.",
+  },
+} as const
+
+export type Topic = keyof typeof TOPICS
+export const TOPIC_SLUGS = Object.keys(TOPICS) as [Topic, ...Topic[]]

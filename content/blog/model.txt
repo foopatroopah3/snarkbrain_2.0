@@ -1,0 +1,63 @@
+------------------------------------------------------------------------------
+---
+title: "Did Ethan Klein Do X?"
+description: "Ethan Klein did Y, which was later misrepresented as X. The full clip shows the context that was cut."
+date: 2026-10-01
+updated: 2026-10-15
+claim: "Ethan Klein did X."
+claimant: "Example Channel"
+verdict: ["False"; "Misleading"; "Mixed"; "True"]
+tags: [israel-palestine, bigotry-allegations, lawsuits-copyright,
+               censorship-claims, family-home, doxxing, past-content,
+               show-guests, business, fabricated-evidence]
+featuredImage: ./thumbnail.png
+corrections:
+  - date: 2026-10-15
+    note: "Corrected the date of the original stream."
+---
+
+## Background
+
+* A short point giving the context needed to understand the claim.
+* Another point. Use **bold** for key phrases and *italics* for titles.
+* Link to a source inline: [the full episode](https://www.youtube.com/watch?v=VIDEO_ID&t=1234s).
+
+## Claim
+
+* State the claim the way its proponents state it.
+
+## Truth
+
+* Every factual statement gets a numbered citation.<sup>[[1]](#ref1)</sup>
+* Several sources on one statement.<sup>[[2]](#ref2)</sup><sup>[[3]](#ref3)</sup>
+* Quote someone with an indented block under a bullet:
+   > Ethan: "The exact words, copied from the clip."<sup>[[4]](#ref4)</sup>
+
+### 1. A subheading, if the Truth section has several parts
+
+Images: put the file in the article folder and describe it in the brackets.
+
+![Screenshot of the original post](./screenshot.png)
+
+Videos: put the file in the article folder. Keep width/height at the clip's
+proportions (1280/720 for widescreen) and keep the file under 25MB.
+
+<video controls preload="metadata" width="1280" height="720" src="./clip.mp4"></video>
+
+For long videos, link to YouTube at the right timestamp instead of uploading.
+
+### 2. Another subheading
+
+* More points.
+
+## Conclusion
+
+* One or two sentences on what the evidence adds up to.
+
+## References
+
+1. <span id="ref1"></span>[YouTube - Full episode at the relevant moment](https://www.youtube.com/watch?v=VIDEO_ID&t=1234s)
+2. <span id="ref2"></span>[Court Listener - Filing title](https://www.courtlistener.com/...)
+3. <span id="ref3"></span>[Reddit - Original post](https://www.reddit.com/...) ([archived](https://web.archive.org/web/...))
+4. <span id="ref4"></span>[YouTube - Quote at 1:02:15](https://www.youtube.com/watch?v=VIDEO_ID&t=3735s)
+------------------------------------------------------------------------------

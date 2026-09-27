@@ -1,0 +1,82 @@
+---
+import type { MarkdownHeading } from "astro"
+
+interface Props {
+  headings: MarkdownHeading[]
+}
+
+const items = Astro.props.headings.filter(h => h.depth === 2)
+---
+
+{items.length >= 3 && (
+  <nav class="toc" aria-labelledby="toc-label">
+    <p class="kicker" id="toc-label">
+      On this page
+    </p>
+    <ol>
+      {items.map(h => (
+        <li>
+          <a href={`#${h.slug}`}>{h.text}</a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>(".toc a")]
+  const targets = links.map(a => document.getElementById(decodeURIComponent(a.hash.slice(1))))
+
+  if (links.length) {
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const line = innerHeight * 0.35
+      const atBottom = innerHeight + scrollY >= document.documentElement.scrollHeight - 4
+      let current = atBottom ? targets.length - 1 : 0
+      if (!atBottom) targets.forEach((t, i) => t && t.getBoundingClientRect().top <= line && (current = i))
+      links.forEach((a, i) =>
+        i === current ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"),
+      )
+    }
+    const schedule = () => (frame ||= requestAnimationFrame(update))
+    addEventListener("scroll", schedule, { passive: true })
+    addEventListener("resize", schedule, { passive: true })
+    update()
+  }
+</script>
+
+<style>
+  .toc {
+    font-family: var(--font-sans);
+  }
+
+  ol {
+    list-style: none;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    border-left: 2px solid var(--line);
+  }
+
+  a {
+    display: block;
+    margin-left: -2px;
+    padding: 0.3rem 0 0.3rem 0.9rem;
+    border-left: 2px solid transparent;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+
+  a:hover,
+  a[aria-current] {
+    color: var(--ink);
+    border-left-color: var(--brand);
+  }
+
+  a[aria-current] {
+    font-weight: 650;
+  }
+</style>

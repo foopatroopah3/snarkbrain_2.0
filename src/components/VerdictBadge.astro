@@ -1,0 +1,25 @@
+---
+import { VERDICTS, type Verdict } from "../site"
+
+interface Props {
+  verdict: Verdict
+  size?: "sm" | "md" | "lg"
+  meta?: boolean
+}
+
+const { verdict, size = "md", meta = false } = Astro.props
+const { slug } = VERDICTS[verdict]
+const icon = {
+  false: { d: "M7 7l10 10M17 7 7 17", box: "5.5 5.5 13 13" },
+  misleading: { d: "M12 7v6m0 4h.01", box: "10.5 5.5 3 13" },
+  mixed: { d: "M6 12h12", box: "4.5 5.5 15 13" },
+  true: { d: "m6 12.5 4 4L18 8", box: "4.5 5.5 15 13" },
+}[slug]
+---
+
+<span class:list={["verdict", `verdict--${slug}`, `verdict--${size}`]}>
+  <svg viewBox={icon.box} aria-hidden="true">
+    <path d={icon.d}></path>
+  </svg>
+  <span data-pagefind-meta={meta ? "verdict" : undefined}>{verdict}</span>
+</span>

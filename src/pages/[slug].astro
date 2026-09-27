@@ -1,0 +1,244 @@
+---
+import { render } from "astro:content"
+import Base from "../layouts/Base.astro"
+import ArticleCard from "../components/ArticleCard.astro"
+import ShareButtons from "../components/ShareButtons.astro"
+import Toc from "../components/Toc.astro"
+import VerdictCard from "../components/VerdictCard.astro"
+import { SITE, TOPICS } from "../site"
+import {
+  articleUrl,
+  citationCount,
+  formatDate,
+  getArticles,
+  isoDate,
+  lastUpdated,
+  readingMinutes,
+  related,
+  topicUrl,
+  type Article,
+} from "../lib/articles"
+import { articleGraph, breadcrumbs } from "../lib/schema"
+
+export async function getStaticPaths() {
+  const all = await getArticles()
+  return all.map(article => ({ params: { slug: article.id }, props: { article, all } }))
+}
+
+interface Props {
+  article: Article
+  all: Article[]
+}
+
+const { article, all } = Astro.props
+const { Content, headings } = await render(article)
+const { title, description, date, tags, corrections } = article.data
+
+const path = articleUrl(article)
+const updated = lastUpdated(article)
+const sources = citationCount(article)
+const crumbs = [
+  { name: "Home", path: "/" },
+  { name: TOPICS[tags[0]].label, path: topicUrl(tags[0]) },
+  { name: title, path },
+]
+const ogImage = `/og/${article.id}.jpg`
+const graph = [...articleGraph(article, path, new URL(ogImage, SITE.url).href), breadcrumbs(crumbs)]
+const more = related(article, all)
+const canonical = new URL(path, SITE.url).href
+---
+
+<Base
+  title={title}
+  description={`Verdict: ${article.data.verdict}. ${description}`}
+  image={ogImage}
+  imageAlt={title}
+  type="article"
+  published={date}
+  modified={updated}
+  tags={tags.map(t => TOPICS[t].label)}
+  graph={graph}
+>
+  <div class="container layout">
+    <article class="article" data-pagefind-body>
+      <header class="head">
+        <h1>{title}</h1>
+        <p class="byline" data-pagefind-ignore>
+          <span>
+            <span class="label">Published</span> <time datetime={isoDate(date)}>{formatDate(date)}</time>
+          </span>
+          {updated && (
+            <span>
+              Updated <time datetime={isoDate(updated)}>{formatDate(updated)}</time>
+            </span>
+          )}
+          <span>{readingMinutes(article)} min read</span>
+          {sources > 0 && <span>{sources} sources</span>}
+        </p>
+        <ul class="chips" data-pagefind-ignore>
+          {tags.map(t => (
+            <li>
+              <a class="chip" href={topicUrl(t)}>
+                {TOPICS[t].label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </header>
+
+      <VerdictCard article={article} />
+
+      <div class="prose body">
+        <Content />
+      </div>
+
+      {corrections.length > 0 && (
+        <section class="corrections" aria-labelledby="corrections-label">
+          <h2 id="corrections-label">Corrections</h2>
+          <ul>
+            {corrections.map(c => (
+              <li>
+                <time datetime={isoDate(c.date)}>{formatDate(c.date)}</time>: {c.note}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <ShareButtons url={canonical} title={title} verdict={article.data.verdict} />
+
+      <aside class="report" data-pagefind-ignore>
+        <p>
+          <strong>Spotted an error or have new evidence?</strong> Email
+          <a href={`mailto:${SITE.email}?subject=${encodeURIComponent(`Correction: ${title}`)}`}>{SITE.email}</a>.
+        </p>
+      </aside>
+    </article>
+
+    <aside class="sidebar" data-pagefind-ignore>
+      <div class="sticky">
+        <Toc headings={headings} />
+      </div>
+    </aside>
+  </div>
+
+  {more.length > 0 && (
+    <section class="container section related" aria-labelledby="related-label">
+      <div class="section-head">
+        <h2 id="related-label">Related fact-checks</h2>
+        <a href={topicUrl(tags[0])}>More in {TOPICS[tags[0]].label} →</a>
+      </div>
+      <ul class="card-grid">
+        {more.map(a => (
+          <li>
+            <ArticleCard article={a} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</Base>
+
+<script src="../scripts/references.ts"></script>
+<script src="../scripts/quote-link.ts"></script>
+
+<style>
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, var(--w-prose)) 13rem;
+    justify-content: center;
+    gap: clamp(2rem, 1rem + 4vw, 5rem);
+    padding-top: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  }
+
+  .head {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .byline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 22rem) {
+    .byline .label {
+      display: none;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .byline {
+      column-gap: 0.6rem;
+      font-size: clamp(0.7rem, 3.3vw, 0.8125rem);
+    }
+  }
+
+  .body {
+    margin-top: 2rem;
+  }
+
+  .body > :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .corrections {
+    margin-top: 2.5rem;
+    padding: 1.25rem 1.4rem;
+    border-left: 3px solid var(--v-misleading-fg);
+    background: var(--surface);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .corrections h2 {
+    font-size: 1.05rem;
+  }
+
+  .corrections ul {
+    margin: 0.6rem 0 0;
+    padding-left: 1.1rem;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+
+  .report {
+    margin-top: 1.5rem;
+    padding: 1.1rem 1.3rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+
+  .report strong {
+    color: var(--ink);
+  }
+
+  .sticky {
+    position: sticky;
+    top: calc(var(--header-h) + 2rem);
+    padding-top: 0.6rem;
+  }
+
+  .related {
+    border-top: 1px solid var(--line);
+    margin-top: clamp(2.5rem, 2rem + 3vw, 4rem);
+  }
+
+  @media (max-width: 64rem) {
+    .layout {
+      grid-template-columns: minmax(0, var(--w-prose));
+    }
+    .sidebar {
+      display: none;
+    }
+  }
+</style>
