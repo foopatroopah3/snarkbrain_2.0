@@ -8,7 +8,6 @@
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
-    "deploy": "npm run build && wrangler deploy",
     "format": "prettier --write \"**/*.{js,mjs,ts,astro,css,json,md}\""
   },
   "dependencies": {
@@ -17,13 +16,13 @@
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/montserrat": "^5.3.0",
     "@fontsource-variable/source-serif-4": "^5.3.0",
+    "@vercel/analytics": "^2.0.1",
     "astro": "^7.3.5",
     "sharp": "^0.35.4"
   },
   "devDependencies": {
     "pagefind": "^1.5.2",
     "prettier": "^3.9.9",
-    "prettier-plugin-astro": "^1.1.0",
-    "wrangler": "^4.141.0"
+    "prettier-plugin-astro": "^1.1.0"
   }
 }
