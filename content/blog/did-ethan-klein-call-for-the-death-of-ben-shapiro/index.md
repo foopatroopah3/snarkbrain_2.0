@@ -8,7 +8,6 @@ verdict: "Misleading"
 tags: [past-content]
 featuredImage: ./shapiro.webp
 ---
-Ethan's Comment About Ben Shapiro
 
 ## Background
 

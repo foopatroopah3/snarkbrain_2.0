@@ -7,7 +7,6 @@ verdict: "False"
 tags: [lawsuits-copyright]
 featuredImage: ./thumbnail.webp
 ---
-The Content Nuke Copyright Lawsuits
 
 ## Background
 

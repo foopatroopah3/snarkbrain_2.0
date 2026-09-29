@@ -7,7 +7,6 @@ verdict: "Misleading"
 tags: [israel-palestine]
 featuredImage: ./yoav.webp
 ---
-Hila's Comment About Yoav Gallant
 
 ## Background
 

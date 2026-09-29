@@ -7,7 +7,6 @@ verdict: "Misleading"
 tags: [family-home]
 featuredImage: ./thumbnail.webp
 ---
-Denims' Chat and CPS Call Allegations
 
 ## Background
 

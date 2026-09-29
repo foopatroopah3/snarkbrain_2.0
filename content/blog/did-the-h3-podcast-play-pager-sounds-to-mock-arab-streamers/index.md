@@ -7,7 +7,6 @@ verdict: "False"
 tags: [israel-palestine, bigotry-allegations]
 featuredImage: ./thumbnail.webp
 ---
-Pager Sound During H3 Show #149
 
 ## Background
 

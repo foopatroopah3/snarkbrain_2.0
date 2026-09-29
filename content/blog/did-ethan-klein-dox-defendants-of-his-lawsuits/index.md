@@ -7,7 +7,6 @@ verdict: "False"
 tags: [lawsuits-copyright, doxxing]
 featuredImage: ./thumbnail.png
 ---
-Doxing Claims Related to Lawsuits
 
 ## Background
 

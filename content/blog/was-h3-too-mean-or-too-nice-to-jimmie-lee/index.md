@@ -7,7 +7,6 @@ verdict: "Misleading"
 tags: [show-guests]
 featuredImage: ./jimmy.webp
 ---
-Jimmie Lee and the H3 Podcast
 
 ## Background
 

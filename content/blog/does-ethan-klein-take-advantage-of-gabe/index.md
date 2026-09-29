@@ -7,7 +7,6 @@ verdict: "False"
 tags: [show-guests]
 featuredImage: ./gabe.jpg
 ---
-Gabe's Role on the H3 Podcast
 
 ## Background
 

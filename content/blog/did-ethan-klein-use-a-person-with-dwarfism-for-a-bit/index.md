@@ -8,7 +8,6 @@ verdict: "False"
 tags: [show-guests]
 featuredImage: ./thumbnail.webp
 ---
-Aubrey Smalls' Appearance on H3
 
 ## Background
 

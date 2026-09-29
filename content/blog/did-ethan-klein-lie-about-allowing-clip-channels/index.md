@@ -7,7 +7,6 @@ verdict: "False"
 tags: [lawsuits-copyright, censorship-claims]
 featuredImage: ./thumbnail.png
 ---
-Ethan's Policy on Clip Channels
 
 ## Background
 

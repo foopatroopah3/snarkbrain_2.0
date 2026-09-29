@@ -7,7 +7,6 @@ verdict: "False"
 tags: [israel-palestine, censorship-claims]
 featuredImage: ./thumbnail.webp
 ---
-Reporting of "Do Not Worry" Podcast Episode
 
 ## Background
 

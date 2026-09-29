@@ -7,7 +7,6 @@ verdict: "Misleading"
 tags: [israel-palestine]
 featuredImage: ./thumbnail.png
 ---
-Hila's IDF Service
 
 ## Background
 

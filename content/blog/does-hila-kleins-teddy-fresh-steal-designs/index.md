@@ -7,7 +7,6 @@ verdict: "Misleading"
 tags: [business]
 featuredImage: ./thumbnail.png
 ---
-Allegations of Design Theft at Teddy Fresh
 
 ## Background
 

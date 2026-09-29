@@ -7,7 +7,6 @@ verdict: "Misleading"
 tags: [business]
 featuredImage: ./thumbnail.webp
 ---
-DraftKings and PrizePicks Sponsorships
 
 ## Background
 

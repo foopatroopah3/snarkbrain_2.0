@@ -7,7 +7,6 @@ verdict: "False"
 tags: [lawsuits-copyright, censorship-claims]
 featuredImage: ./thumbnail.webp
 ---
-DMCA Takedown Requests on Reddit
 
 ## Background
 

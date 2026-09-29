@@ -7,7 +7,6 @@ verdict: "False"
 tags: [family-home, fabricated-evidence]
 featuredImage: ./giardia.jpg
 ---
-Dog Giardia Incident and CPS Visit
 
 ## Background
 

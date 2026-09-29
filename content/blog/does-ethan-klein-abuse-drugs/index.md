@@ -7,7 +7,6 @@ verdict: "False"
 tags: [fabricated-evidence]
 featuredImage: ./thumbnail.webp
 ---
-False Drug Abuse Allegations
 
 ## Background
 

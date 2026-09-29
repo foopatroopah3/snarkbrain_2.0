@@ -7,7 +7,6 @@ verdict: "False"
 tags: [israel-palestine, bigotry-allegations]
 featuredImage: ./thumbnail.webp
 ---
-Hila's Reaction to Rudy Giuliani
 
 ## Background
 

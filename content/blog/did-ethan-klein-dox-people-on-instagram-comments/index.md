@@ -7,7 +7,6 @@ verdict: "False"
 tags: [doxxing]
 featuredImage: ./thumbnail.webp
 ---
-Instagram Comment Review Incident
 
 ## Background
 

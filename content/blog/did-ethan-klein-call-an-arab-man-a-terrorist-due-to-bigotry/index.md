@@ -7,7 +7,6 @@ verdict: "False"
 tags: [israel-palestine, bigotry-allegations]
 featuredImage: ./thumbnail.webp
 ---
-Ethan's Comments About Rashid Al-Haddad
 
 ## Background
 

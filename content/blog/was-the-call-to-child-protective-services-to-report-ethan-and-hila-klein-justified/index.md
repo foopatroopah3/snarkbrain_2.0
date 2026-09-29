@@ -7,7 +7,6 @@ verdict: "False"
 tags: [family-home]
 featuredImage: ./thumbnail.png
 ---
-The CPS Visit to the Klein Household
 
 ## Background
 

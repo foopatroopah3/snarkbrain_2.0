@@ -7,7 +7,6 @@ verdict: "Misleading"
 tags: [past-content]
 featuredImage: ./joji.webp
 ---
-Ethan's "Women Are to Be Conquered" Comment
 
 ## Background
 

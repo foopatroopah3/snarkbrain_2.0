@@ -7,7 +7,6 @@ verdict: "False"
 tags: [business, lawsuits-copyright]
 featuredImage: ./fupa.webp
 ---
-The Fair Use Protection Account
 
 ## Background
 

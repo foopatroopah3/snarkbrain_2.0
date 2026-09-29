@@ -7,7 +7,6 @@ verdict: "False"
 tags: [bigotry-allegations, past-content]
 featuredImage: ./thumbnail.png
 ---
-Ethan's Regret Over His Past Use of Racial Slurs
 
 ## Background
 
