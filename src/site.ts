@@ -3,7 +3,7 @@ export const SITE = {
   url: "https://snarkbrain.com",
   tagline: "Fact-checking the claims about Ethan Klein, Hila Klein and the H3 Podcast",
   description:
-    "Fact-checking the claims about Ethan Klein, Hila Klein and the H3 Podcast: viral accusations traced back to the full clips and public records they came from.",
+    "Fact-checking the H3 drama and controversies: viral claims about Ethan Klein, Hila Klein and the H3 Podcast, from H3 Snark and beyond, traced to the full clips.",
   email: "contact@snarkbrain.com",
   locale: "en_US",
 }
@@ -38,7 +38,7 @@ export const TOPICS = {
   "israel-palestine": {
     label: "Israel & Palestine",
     description:
-      "Claims about Ethan and Hila Klein's statements, history and reactions relating to Israel, Palestine and the wider Middle East.",
+      "Claims about Ethan and Hila Klein's views on Israel, Zionism and Gaza, Hila's IDF service, and their reactions to the war.",
   },
   "bigotry-allegations": {
     label: "Bigotry Allegations",
@@ -46,7 +46,8 @@ export const TOPICS = {
   },
   "lawsuits-copyright": {
     label: "Lawsuits & Copyright",
-    description: "Copyright lawsuits, DMCA takedowns, fair use, clip channels and legal funds.",
+    description:
+      "The Content Nuke lawsuits against Denims, Frogan and Kaceytron, the Hasan Piker fallout, DMCA takedowns, fair use and clip channels.",
   },
   "censorship-claims": {
     label: "Censorship Claims",

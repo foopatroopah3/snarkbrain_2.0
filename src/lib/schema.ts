@@ -25,6 +25,11 @@ export const website = () => ({
   description: SITE.description,
   inLanguage: "en",
   publisher: { "@id": ORG_ID },
+  about: [
+    { "@type": "Person", name: "Ethan Klein", sameAs: "https://en.wikipedia.org/wiki/Ethan_and_Hila_Klein" },
+    { "@type": "Person", name: "Hila Klein", sameAs: "https://en.wikipedia.org/wiki/Ethan_and_Hila_Klein" },
+    { "@type": "CreativeWorkSeries", name: "H3 Podcast", sameAs: "https://en.wikipedia.org/wiki/H3_Podcast" },
+  ],
   potentialAction: {
     "@type": "SearchAction",
     target: { "@type": "EntryPoint", urlTemplate: `${SITE.url}/articles/?q={search_term_string}` },

@@ -24,7 +24,7 @@ const { label, description } = TOPICS[topic]
 const articles = all.filter(a => a.data.tags.includes(topic))
 const others = topicCounts(all)
 const path = topicUrl(topic)
-const title = `${label} fact-checks`
+const title = `${label}: Ethan & Hila Klein Fact-Checks`
 const crumbs = [
   { name: "Home", path: "/" },
   { name: "Topics", path: "/topics/" },
