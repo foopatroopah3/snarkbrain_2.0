@@ -1,0 +1,278 @@
+<span class="listen" hidden data-pagefind-ignore>
+  <button type="button" class="skip" data-skip="-1" aria-label="Previous sentence">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M11 18V6l-8.5 6zm.5-6 8.5 6V6z"></path>
+    </svg>
+  </button>
+  <button type="button" class="toggle" aria-pressed="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-play">
+      <path d="M8 5.5v13l10.5-6.5z"></path>
+    </svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-pause">
+      <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"></path>
+    </svg>
+    <span class="label">Listen</span>
+  </button>
+  <button type="button" class="skip" data-skip="1" aria-label="Next sentence">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M13 6v12l8.5-6zm-.5 6L4 6v12z"></path>
+    </svg>
+  </button>
+  <button type="button" class="stop" aria-label="Stop listening">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 7h10v10H7z"></path>
+    </svg>
+  </button>
+</span>
+
+<script>
+  const root = document.querySelector<HTMLElement>(".listen")
+  const synth = window.speechSynthesis
+
+  if (root && synth) {
+    root.hidden = false
+    const toggle = root.querySelector<HTMLButtonElement>(".toggle")!
+    const label = root.querySelector<HTMLElement>(".label")!
+
+    type Sentence = { text: string; range: Range; el: Element }
+
+    let sentences: Sentence[] = []
+    let index = 0
+    let run = 0
+    let state: "idle" | "playing" | "paused" = "idle"
+
+    const period = (t: string) => (/[.!?:]$/.test(t) ? t : `${t}.`)
+    const seg = new Intl.Segmenter("en", { granularity: "sentence" })
+    const skipped = "sup, video, img, script"
+
+    function split(el: Element, heading: boolean): Sentence[] {
+      const map: [Text, number][] = []
+      let flat = ""
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT)
+      for (let n = walker.nextNode() as Text | null; n; n = walker.nextNode() as Text | null) {
+        if (n.parentElement?.closest(skipped)) continue
+        for (let i = 0; i < n.data.length; i++) {
+          const space = /\s/.test(n.data[i])
+          if (space && (!flat || flat.endsWith(" "))) continue
+          flat += space ? " " : n.data[i]
+          map.push([n, i])
+        }
+      }
+      return [...seg.segment(flat)].flatMap(({ segment, index: at }) => {
+        const text = segment.trim()
+        if (!text) return []
+        const start = at + segment.length - segment.trimStart().length
+        const end = start + text.length - 1
+        const range = document.createRange()
+        range.setStart(...map[start])
+        range.setEnd(map[end][0], map[end][1] + 1)
+        return [{ text: heading ? period(text) : text, range, el }]
+      })
+    }
+
+    function collect() {
+      const title = document.querySelector("h1")
+      const list = title ? split(title, true) : []
+      for (const el of document.querySelectorAll(".prose.body > *")) {
+        const heading = /^H[2-4]$/.test(el.tagName)
+        if (heading && /references/i.test(el.textContent ?? "")) break
+        list.push(...split(el, heading))
+      }
+      return list
+    }
+
+    const highlights = "highlights" in CSS
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)")
+
+    const headerBottom = () => document.querySelector(".site-header")?.getBoundingClientRect().bottom ?? 0
+    const visible = (r: DOMRect) => r.bottom > headerBottom() && r.top < innerHeight
+    const inView = (r: DOMRect) => r.top >= headerBottom() && r.bottom <= innerHeight
+
+    function mark(s?: Sentence, prev?: Sentence) {
+      document.querySelector(".listen-current")?.classList.remove("listen-current")
+      if (!s) {
+        if (highlights) CSS.highlights.delete("listen")
+        return
+      }
+      if (highlights) CSS.highlights.set("listen", new Highlight(s.range))
+      else s.el.classList.add("listen-current")
+      const r = s.range.getBoundingClientRect()
+      // Only follow along while the reader hasn't scrolled away.
+      if (!inView(r) && (!prev || visible(prev.range.getBoundingClientRect()))) {
+        scrollBy({ top: r.top - innerHeight / 3, behavior: reduce.matches ? "auto" : "smooth" })
+      }
+    }
+
+    const tiers: [RegExp, number][] = [
+      [/natural|neural/i, 100],
+      [/premium/i, 95],
+      [/enhanced|siri/i, 90],
+      [/^google (us|uk) english/i, 80],
+      [/^(ava|allison|samantha|susan|zoe|evan|nathan|alex|daniel|karen|moira|tessa|serena|kate|oliver)\b/i, 60],
+      [/network/i, 55],
+      [/^(english|google)/i, 50],
+      [
+        /eloquence|espeak|\b(albert|bahh|bells|boing|bubbles|cellos|eddy|flo|fred|grandma|grandpa|jester|junior|kathy|organ|ralph|reed|rocko|sandy|shelley|trinoids|whisper|wobble|zarvox|bad news|good news|superstar)\b/i,
+        -100,
+      ],
+      [/\b(david|zira|mark|hazel|george)\b/i, -20],
+    ]
+    let chosen: SpeechSynthesisVoice | undefined
+
+    function voice() {
+      if (chosen) return chosen
+      const lang = (v: SpeechSynthesisVoice) => v.lang.replace("_", "-").toLowerCase()
+      const score = (v: SpeechSynthesisVoice) =>
+        (tiers.find(([re]) => re.test(v.name))?.[1] ?? 0) +
+        (lang(v) === "en-us" ? 10 : /^en-(gb|au|ca|ie|nz)/.test(lang(v)) ? 6 : 3) +
+        (v.default ? 2 : 0)
+      const en = synth.getVoices().filter(v => /^en(-|$)/.test(lang(v)))
+      chosen = en.sort((a, b) => score(b) - score(a))[0]
+      return chosen
+    }
+    synth.addEventListener?.("voiceschanged", () => (chosen = undefined))
+
+    function render() {
+      root!.dataset.state = state
+      toggle.setAttribute("aria-pressed", String(state === "playing"))
+      label.textContent = state === "playing" ? "Pause" : state === "paused" ? "Resume" : "Listen"
+    }
+
+    // One utterance per sentence: Chrome cuts off long ones and native pause is unreliable on mobile.
+    // `run` makes cancelled utterances ignore their end event.
+    function speak(prev?: Sentence) {
+      synth.cancel()
+      if (index >= sentences.length) return reset()
+      const id = ++run
+      mark(sentences[index], prev)
+      const u = new SpeechSynthesisUtterance(sentences[index].text)
+      const v = voice()
+      if (v) u.voice = v
+      u.lang = v?.lang ?? "en-US"
+      u.onend = () => {
+        if (id !== run || state !== "playing") return
+        speak(sentences[index++])
+      }
+      synth.speak(u)
+    }
+
+    function reset() {
+      run++
+      synth.cancel()
+      state = "idle"
+      index = 0
+      mark()
+      render()
+    }
+
+    toggle.addEventListener("click", () => {
+      if (state === "playing") {
+        run++
+        synth.cancel()
+        state = "paused"
+      } else {
+        if (state === "idle") sentences = collect()
+        state = "playing"
+        speak()
+      }
+      render()
+    })
+
+    for (const b of root.querySelectorAll<HTMLButtonElement>(".skip")) {
+      b.addEventListener("click", () => {
+        const prev = sentences[index]
+        index = Math.min(Math.max(0, index + Number(b.dataset.skip)), sentences.length - 1)
+        if (state === "playing") speak(prev)
+        else if (state === "paused") mark(sentences[index], prev)
+      })
+    }
+
+    root.querySelector(".stop")!.addEventListener("click", reset)
+    addEventListener("pagehide", () => synth.cancel())
+    render()
+  }
+</script>
+
+<style>
+  :global(::highlight(listen)) {
+    background-color: var(--mark);
+    color: var(--ink);
+  }
+
+  :global(.listen-current) {
+    border-radius: 4px;
+    background: var(--mark);
+  }
+
+  .listen {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    margin-block: -0.35rem;
+  }
+
+  .listen[hidden],
+  .listen[data-state="idle"] .skip,
+  .listen[data-state="idle"] .stop {
+    display: none;
+  }
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    min-width: 1.75rem;
+    height: 1.75rem;
+    padding: 0 0.4rem;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: var(--brand-text);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: var(--brand-tint);
+  }
+
+  .toggle {
+    padding-inline: 0.45rem 0.6rem;
+  }
+
+  svg {
+    width: 0.8rem;
+    height: 0.8rem;
+    fill: currentColor;
+  }
+
+  .icon-pause,
+  [data-state="playing"] .icon-play {
+    display: none;
+  }
+
+  [data-state="playing"] .icon-pause {
+    display: block;
+  }
+
+  @media (max-width: 30rem) {
+    .listen {
+      gap: 0;
+      margin-inline-start: -0.35rem;
+    }
+    button {
+      min-width: 1.5rem;
+      height: 1.5rem;
+      padding-inline: 0.3rem;
+    }
+    .listen:not([data-state="idle"]) button {
+      width: 1.5rem;
+      padding: 0;
+    }
+    .listen:not([data-state="idle"]) .label {
+      display: none;
+    }
+  }
+</style>

@@ -2,6 +2,7 @@
 import { render } from "astro:content"
 import Base from "../layouts/Base.astro"
 import ArticleCard from "../components/ArticleCard.astro"
+import ListenButton from "../components/ListenButton.astro"
 import ShareButtons from "../components/ShareButtons.astro"
 import Toc from "../components/Toc.astro"
 import VerdictCard from "../components/VerdictCard.astro"
@@ -72,8 +73,11 @@ const canonical = new URL(path, SITE.url).href
               Updated <time datetime={isoDate(updated)}>{formatDate(updated)}</time>
             </span>
           )}
-          <span>{readingMinutes(article)} min read</span>
+          <span>
+            {readingMinutes(article)} min<span class="label"> read</span>
+          </span>
           {sources > 0 && <span>{sources} sources</span>}
+          <ListenButton />
         </p>
         <ul class="chips" data-pagefind-ignore>
           {tags.map(t => (
@@ -126,12 +130,14 @@ const canonical = new URL(path, SITE.url).href
     <section class="container section related" aria-labelledby="related-label">
       <div class="section-head">
         <h2 id="related-label">Related fact-checks</h2>
-        <a href={topicUrl(tags[0])}>More in {TOPICS[tags[0]].label} →</a>
+        <a href={topicUrl(tags[0])}>
+          More<span class="label"> in {TOPICS[tags[0]].label}</span> →
+        </a>
       </div>
-      <ul class="card-grid">
+      <ul class="card-grid card-row">
         {more.map(a => (
           <li>
-            <ArticleCard article={a} />
+            <ArticleCard article={a} sizes="(min-width: 76rem) 360px, (min-width: 44rem) 45vw, 66vw" />
           </li>
         ))}
       </ul>
@@ -142,7 +148,44 @@ const canonical = new URL(path, SITE.url).href
 <script src="../scripts/references.ts"></script>
 <script src="../scripts/quote-link.ts"></script>
 
+<script>
+  const article = document.querySelector<HTMLElement>(".article")
+  const header = document.querySelector(".site-header")
+  if (article && header) {
+    const bar = document.createElement("div")
+    bar.className = "read-progress"
+    bar.setAttribute("aria-hidden", "true")
+    header.append(bar)
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const r = article.getBoundingClientRect()
+      bar.style.transform = `scaleX(${Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)))})`
+    }
+    addEventListener("scroll", () => (frame ||= requestAnimationFrame(update)), { passive: true })
+    addEventListener("resize", update, { passive: true })
+    update()
+  }
+</script>
+
 <style>
+  :global(.read-progress) {
+    display: none;
+  }
+
+  @media (max-width: 44rem) {
+    :global(.read-progress) {
+      display: block;
+      position: absolute;
+      inset: auto 0 -1px;
+      height: 2px;
+      background: var(--brand);
+      transform: scaleX(0);
+      transform-origin: left;
+      pointer-events: none;
+    }
+  }
+
   .layout {
     display: grid;
     grid-template-columns: minmax(0, var(--w-prose)) 13rem;
@@ -167,16 +210,14 @@ const canonical = new URL(path, SITE.url).href
     color: var(--ink-3);
   }
 
-  @media (max-width: 22rem) {
-    .byline .label {
-      display: none;
-    }
-  }
-
   @media (max-width: 30rem) {
     .byline {
       column-gap: 0.6rem;
       font-size: clamp(0.7rem, 3.3vw, 0.8125rem);
+    }
+    .byline .label,
+    .related .label {
+      display: none;
     }
   }
 
