@@ -29,10 +29,10 @@ const graph = [webPage("WebPage", "/", title, SITE.description)]
         <p class="lede">
           Viral H3 drama and controversies, from H3Snark threads to cropped clips on TikTok and X, traced back to the
           full episodes and public records they came from, with every claim rated and every source cited.
+          <a class="more" href="/about/">
+            Learn&nbsp;more&nbsp;→
+          </a>
         </p>
-        <a class="more" href="/about/">
-          Learn more →
-        </a>
         <dl class="stats">
           <div>
             <dt>Topics</dt>
@@ -182,10 +182,19 @@ const graph = [webPage("WebPage", "/", title, SITE.description)]
   }
 
   .more {
-    justify-self: start;
+    display: block;
+    width: fit-content;
+    margin-top: 1.25rem;
     font-family: var(--font-sans);
     font-size: 0.9375rem;
     font-weight: 600;
+  }
+
+  @media (max-width: 40rem) {
+    .more {
+      display: inline;
+      margin: 0 0 0 0.2rem;
+    }
   }
 
   .stats {

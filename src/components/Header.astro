@@ -185,6 +185,12 @@ const current = (href: string) => (path.startsWith(href) ? "page" : undefined)
     cursor: pointer;
   }
 
+  .icon-btn:not(.search-btn) {
+    flex-shrink: 0;
+    width: 2.4rem;
+    padding: 0;
+  }
+
   .icon-btn:hover {
     color: var(--ink);
     border-color: var(--line-strong);
@@ -223,7 +229,12 @@ const current = (href: string) => (path.startsWith(href) ? "page" : undefined)
 
   @media (max-width: 56rem) {
     .search-btn {
+      flex-shrink: 0;
       min-width: 0;
+      width: 2.4rem;
+      padding: 0;
+      justify-content: center;
+      color: var(--ink-2);
     }
     .search-label,
     kbd {

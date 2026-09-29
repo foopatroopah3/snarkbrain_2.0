@@ -101,9 +101,30 @@ const { claim, claimant, verdict, description } = Astro.props.article.data
     .verdict-card {
       grid-template-columns: 1fr;
     }
+    .claim {
+      gap: 0.45rem;
+    }
     .rating {
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      column-gap: 0.85rem;
+      padding-block: 0.8rem;
       border-left: 0;
       border-top: 1px solid var(--line);
+    }
+    .rating .kicker {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    .meaning {
+      text-wrap: pretty;
+    }
+    .summary {
+      padding-block: 0.85rem;
     }
   }
 </style>
