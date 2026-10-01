@@ -24,7 +24,8 @@ const { label, description } = TOPICS[topic]
 const articles = all.filter(a => a.data.tags.includes(topic))
 const others = topicCounts(all)
 const path = topicUrl(topic)
-const title = `${label}: Ethan & Hila Klein Fact-Checks`
+const title = `${label} fact checks`
+const shareDescription = `${articles.length} fact checks in ${label}. ${description}`
 const crumbs = [
   { name: "Home", path: "/" },
   { name: "Topics", path: "/topics/" },
@@ -34,8 +35,10 @@ const crumbs = [
 
 <Base
   title={title}
-  description={description}
-  graph={[webPage("CollectionPage", path, title, description), breadcrumbs(crumbs)]}
+  description={shareDescription}
+  image={`/og/v2/topic/${topic}.jpg`}
+  imageAlt={`SnarkBrain logo and ${label} fact checks`}
+  graph={[webPage("CollectionPage", path, title, shareDescription), breadcrumbs(crumbs)]}
 >
   <div class="container">
     <header class="page-head">

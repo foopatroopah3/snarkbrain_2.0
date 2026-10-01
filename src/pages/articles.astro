@@ -8,9 +8,8 @@ import { breadcrumbs, webPage } from "../lib/schema"
 const articles = await getArticles()
 const topics = topicCounts(articles)
 
-const title = "H3 Controversies: Every Claim Fact-Checked"
-const description =
-  "Every H3 controversy we've fact-checked: claims about Ethan Klein, Hila Klein and the H3 Podcast, each rated and backed by primary sources."
+const title = "H3 fact checks"
+const description = `${articles.length} fact checks on claims about Ethan Klein, Hila Klein and the H3 Podcast. Browse clear verdicts and the primary sources behind them.`
 const crumbs = [
   { name: "Home", path: "/" },
   { name: title, path: "/articles/" },

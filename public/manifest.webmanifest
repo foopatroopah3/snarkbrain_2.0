@@ -1,7 +1,7 @@
 {
   "name": "SnarkBrain",
   "short_name": "SnarkBrain",
-  "description": "Fact-checking the claims about Ethan Klein, Hila Klein and the H3 Podcast.",
+  "description": "Fact checks on H3 claims with full context, clear verdicts and cited sources.",
   "start_url": "/",
   "display": "minimal-ui",
   "background_color": "#fbf8f4",

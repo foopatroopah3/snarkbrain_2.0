@@ -4,7 +4,6 @@ import { Font, getImage } from "astro:assets"
 import { SITE } from "../site"
 import { isoDate } from "../lib/articles"
 import { organization, toJsonLd, website } from "../lib/schema"
-import ogDefault from "../assets/og-default.png"
 import logoMark from "../assets/logo-mark.png"
 
 export interface Props {
@@ -23,8 +22,8 @@ export interface Props {
 const {
   title,
   description = SITE.description,
-  image = ogDefault,
-  imageAlt = `${SITE.name} logo`,
+  image,
+  imageAlt,
   type = "website",
   published,
   modified,
@@ -34,11 +33,28 @@ const {
 } = Astro.props
 
 const canonical = new URL(Astro.url.pathname, SITE.url).href
+const generalKind =
+  (
+    {
+      "/": "home",
+      "/articles/": "articles",
+      "/topics/": "topics",
+      "/about/": "about",
+      "/methodology/": "methodology",
+      "/contact/": "contact",
+      "/privacy/": "privacy",
+    } as Record<string, string>
+  )[Astro.url.pathname] ?? "home"
+const shareImage = image ?? `/og/v2/general/${generalKind}.jpg`
+const shareImageAlt = imageAlt ??
+  (generalKind === "home"
+    ? "SnarkBrain pink melting brain logo and site name"
+    : `SnarkBrain logo and ${title} sharing card`)
 const pageTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`
 const ogSrc =
-  typeof image === "string"
-    ? image
-    : (await getImage({ src: image, width: 1200, height: 630, fit: "cover", format: "jpeg", quality: 80 })).src
+  typeof shareImage === "string"
+    ? shareImage
+    : (await getImage({ src: shareImage, width: 1200, height: 630, fit: "cover", format: "jpeg", quality: 80 })).src
 const ogUrl = new URL(ogSrc, SITE.url).href
 const logo = await getImage({ src: logoMark, width: 512, format: "png" })
 const jsonLd = toJsonLd([organization(new URL(logo.src, SITE.url).href), website(), ...graph])
@@ -79,9 +95,11 @@ const jsonLd = toJsonLd([organization(new URL(logo.src, SITE.url).href), website
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={ogUrl} />
+<meta property="og:image:secure_url" content={ogUrl} />
+<meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={imageAlt} />
+<meta property="og:image:alt" content={shareImageAlt} />
 {published && <meta property="article:published_time" content={isoDate(published)} />}
 {modified && <meta property="article:modified_time" content={isoDate(modified)} />}
 {tags.map(tag => (
@@ -91,6 +109,6 @@ const jsonLd = toJsonLd([organization(new URL(logo.src, SITE.url).href), website
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogUrl} />
-<meta name="twitter:image:alt" content={imageAlt} />
+<meta name="twitter:image:alt" content={shareImageAlt} />
 
 <script type="application/ld+json" set:html={jsonLd} />

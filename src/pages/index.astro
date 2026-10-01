@@ -13,7 +13,7 @@ const latest = articles.slice(0, 3)
 const topics = topicCounts(articles)
 const sources = articles.reduce((n, a) => n + citationCount(a), 0)
 
-const title = `${SITE.name}: H3 Controversies Fact-Checked | Ethan & Hila Klein`
+const title = `${SITE.name} | H3 claims fact-checked`
 const graph = [webPage("WebPage", "/", title, SITE.description)]
 ---
 
@@ -21,11 +21,7 @@ const graph = [webPage("WebPage", "/", title, SITE.description)]
   <section class="hero">
     <div class="container hero-grid">
       <div class="copy">
-        <h1
-          set:html={SITE.tagline
-            .replace(/(Ethan|Hila) Klein|H3 Podcast/g, m => m.replace(" ", "&nbsp;"))
-            .replace("Hila&nbsp;Klein ", "Hila&nbsp;Klein<br />")}
-        />
+        <h1>{SITE.tagline}</h1>
         <p class="lede">
           Viral H3 drama and controversies, from H3Snark threads to cropped clips on TikTok and X, traced back to the
           full episodes and public records they came from, with every claim rated and every source cited.

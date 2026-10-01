@@ -1,9 +1,9 @@
 export const SITE = {
   name: "SnarkBrain",
   url: "https://snarkbrain.com",
-  tagline: "Fact-checking the claims about Ethan Klein, Hila Klein and the H3 Podcast",
+  tagline: "Fact-checking H3 claims with full context and cited sources",
   description:
-    "Fact-checking the H3 drama and controversies: viral claims about Ethan Klein, Hila Klein and the H3 Podcast, from H3 Snark and beyond, traced to the full clips.",
+    "Fact checks on claims about Ethan Klein, Hila Klein and the H3 Podcast, with clear verdicts, full clips, public records and cited sources.",
   email: "contact@snarkbrain.com",
   locale: "en_US",
 }

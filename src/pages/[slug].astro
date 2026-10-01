@@ -43,7 +43,7 @@ const crumbs = [
   { name: TOPICS[tags[0]].label, path: topicUrl(tags[0]) },
   { name: title, path },
 ]
-const ogImage = `/og/${article.id}.jpg`
+const ogImage = `/og/v2/article/${article.id}.jpg`
 const graph = [...articleGraph(article, path, new URL(ogImage, SITE.url).href), breadcrumbs(crumbs)]
 const more = related(article, all)
 const canonical = new URL(path, SITE.url).href
@@ -53,7 +53,7 @@ const canonical = new URL(path, SITE.url).href
   title={title}
   description={`Verdict: ${article.data.verdict}. ${description}`}
   image={ogImage}
-  imageAlt={title}
+  imageAlt={`SnarkBrain logo and fact check: ${title}. Verdict: ${article.data.verdict}.`}
   type="article"
   published={date}
   modified={updated}

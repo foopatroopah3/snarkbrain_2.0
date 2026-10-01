@@ -10,7 +10,7 @@ const topics = topicCounts(articles).map(t => ({
 }))
 
 const title = "Topics"
-const description = "Fact-checks about Ethan Klein, Hila Klein and the H3 Podcast, organized by subject."
+const description = `${topics.length} topics covering ${articles.length} fact checks about Ethan Klein, Hila Klein and the H3 Podcast, organized by subject.`
 const crumbs = [
   { name: "Home", path: "/" },
   { name: title, path: "/topics/" },
