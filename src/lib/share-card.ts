@@ -18,7 +18,7 @@ const logo = asset("logo-mark.png").toString("base64")
 type Weight = keyof typeof fonts
 type Panel = { eyebrow: string; title: string; detail?: string; titleSize?: number }
 export type ShareCard = {
-  center: { kind: "brand" } | { kind: "text"; title: string }
+  center: { kind: "brand" } | { kind: "text"; title: string } | { kind: "article"; image: Buffer }
   left: Panel
   right: Panel
   accent?: string
@@ -91,11 +91,29 @@ function panel(panel: Panel, x: number, accent: string) {
   ].join("")
 }
 
-function middle(center: ShareCard["center"]) {
+async function middle(center: ShareCard["center"]) {
   if (center.kind === "brand") {
     return [
       `<image x="388" y="105" width="424" height="240" href="data:image/png;base64,${logo}"/>`,
       text("SnarkBrain", 600, 453, 75, "#fff9fa", "bold", "center"),
+    ].join("")
+  }
+  if (center.kind === "article") {
+    const fill = await sharp(center.image)
+      .resize(540, 536, { fit: "cover" })
+      .blur(30)
+      .modulate({ brightness: 0.42 })
+      .toBuffer()
+    const foreground = await sharp(center.image).resize(540, 536, { fit: "inside" }).toBuffer()
+    const thumbnail = await sharp(fill)
+      .composite([{ input: foreground, gravity: "center" }])
+      .png()
+      .toBuffer()
+    return [
+      `<image x="330" y="47" width="540" height="536" href="data:image/png;base64,${thumbnail.toString("base64")}" clip-path="url(#article-image)"/>`,
+      `<rect x="330" y="47" width="540" height="536" rx="20" fill="none" stroke="#ffffff" stroke-opacity=".28" stroke-width="3"/>`,
+      `<rect x="733" y="472" width="125" height="98" rx="18" fill="#1c1720" fill-opacity=".93" stroke="#ff7899" stroke-opacity=".6" stroke-width="2"/>`,
+      `<image x="744" y="490" width="103" height="59" href="data:image/png;base64,${logo}"/>`,
     ].join("")
   }
   let size = 82
@@ -115,11 +133,13 @@ function middle(center: ShareCard["center"]) {
 
 export async function renderShareCard(card: ShareCard) {
   const accent = card.accent ?? "#ff7899"
+  const center = await middle(card.center)
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
     <defs>
       <radialGradient id="glow"><stop stop-color="#553044"/><stop offset="1" stop-color="#2a1d2a"/></radialGradient>
       <linearGradient id="edge" x2="0" y2="1"><stop stop-color="#1e1b22"/><stop offset="1" stop-color="#141319"/></linearGradient>
       <clipPath id="middle"><rect x="${MIDDLE_LEFT}" width="630" height="630"/></clipPath>
+      <clipPath id="article-image"><rect x="330" y="47" width="540" height="536" rx="20"/></clipPath>
     </defs>
     <rect width="1200" height="630" fill="url(#edge)"/>
     <rect x="${MIDDLE_LEFT}" width="630" height="630" fill="url(#glow)"/>
@@ -127,15 +147,8 @@ export async function renderShareCard(card: ShareCard) {
     <path d="M285 0v630M915 0v630" stroke="#594150" stroke-width="2"/>
     <path d="M344 48h512M344 582h512" stroke="${accent}" stroke-opacity=".85" stroke-width="3" stroke-linecap="round"/>
     ${panel(card.left, 34, accent)}
-    ${middle(card.center)}
+    ${center}
     ${panel(card.right, 948, accent)}
   </svg>`
   return sharp(Buffer.from(svg)).jpeg({ quality: 86, mozjpeg: true }).toBuffer()
-}
-
-export function articleCenterTitle(title: string) {
-  return title
-    .replace(/^(Did|Does|Was|Were|Are|Has|Is)\s+/i, "")
-    .replace(/^(Ethan Klein|Hila Klein|Ethan and Hila Klein|Hila and Ethan Klein)\s+/i, "")
-    .replace(/\?$/, "")
 }
