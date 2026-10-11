@@ -5,7 +5,7 @@ date: 2025-11-17
 claim: "Ethan Klein sexually harassed an underage Boston Marathon bombing victim."
 verdict: "Misleading"
 tags: [past-content]
-featuredImage: ./marathon.png
+featuredImage: ./thumbnail.png
 ---
 ## Background
 
