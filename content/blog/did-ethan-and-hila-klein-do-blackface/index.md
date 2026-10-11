@@ -26,6 +26,7 @@ featuredImage: ./blackface-charcoal-mask.png
 ### 1. Charcoal Mask
 
 ![Charcoal Mask](./blackface-charcoal-mask.png)
+![Charcoal Mask, full context](./blackface-charcoal-mask-context.webp)
 
 * This screenshot is from the video "The Black Challenge" where Ethan and Hila tried several black-colored beauty products. The products consisted of black hair dye, charcoal toothpaste powder and, more notably, charcoal face masks. They also drank black-colored water.
 * The video likely came to be after they accumulated various black-colored products from previous videos.
@@ -34,6 +35,7 @@ featuredImage: ./blackface-charcoal-mask.png
 ### 2. Makeup
 
 ![Makeup](./blackface-makeup.webp)
+![Makeup, full context](./blackface-makeup-context.webp)
 
 * This screenshot is from the aforementioned video where Ethan and Hila follow a tutorial and apply makeup on each other in the popular style of "couples makeup" videos. The comedic twist is that the tutorial promises Kim Kardashian's look.
 * Contrary to claims from snarkers, Ethan didn't just straight up paint Hila's face brown. Instead, they applied foundation on their face and contour lines on their cheeks before blending.<sup>[[9]](#ref9)</sup>
@@ -43,6 +45,7 @@ featuredImage: ./blackface-charcoal-mask.png
 ### 3. Spray Tan
 
 ![Spray Tan](./blackface-spray-tan.webp)
+![Spray Tan, full context](./blackface-spray-tan-context.webp)
 
 * This screenshot is from the aforementioned video where Ethan and Hila satirize the "B4-4" boy band and their song "Get Down" for its lyrics and music video where the boy band members appear overly spray-tanned.
 * Ethan decides to replicate their look by getting frosted tips, wearing earrings, wearing a tank top and, of course, getting overly spray-tanned himself.<sup>[[12]](#ref12)</sup>
@@ -53,6 +56,7 @@ featuredImage: ./blackface-charcoal-mask.png
 ### 4. Dead Sea Mud
 
 ![Dead Sea Mud](./blackface-dead-sea-mud.webp)
+![Dead Sea Mud, full context](./blackface-dead-sea-mud-context.webp)
 
 * This screenshot was taken from the h3h3Productions Facebook page, and it's a cropped close-up of a photo Ethan and Hila took during their visit to the Dead Sea where they are covered with mud.<sup>[[15]](#ref15)</sup>
 * Rubbing Dead Sea mud all over your body is a long-standing tradition, believed to be good for the skin and to have health benefits.<sup>[[16]](#ref16)</sup>
